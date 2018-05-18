@@ -40,7 +40,7 @@ services:
         image: daocloud.io/nginx
         volumes:
             - /data/www/imooc:/data/www/imooc
-            - /data/www/imooc/deployment/nginx/conf.d:/etc/nginx/conf.d
+            - /data/www/imooc/deployment/docnginx/conf.d:/etc/nginx/conf.d
             - /data/media/imooc/static:/data/media/imooc/static
             - /data/www/imooc/deployment/nginx/nginx.conf:/etc/nginx/nginx.conf
             - /data/www/imooc/logs/nginx/:/var/logs/nginx
