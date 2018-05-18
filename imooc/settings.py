@@ -27,7 +27,7 @@ SECRET_KEY = '-3b$%7hb72t34xbe@m3h%y_0jt#*ob*(f(7kw*#6bh(s*av661'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [www.davidzhang.xin, 106.14.202.116, 0.0.0.0]
 
 # Application definition
 
