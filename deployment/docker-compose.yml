@@ -18,6 +18,7 @@ services:
         volumes:
             - /data/www/imooc:/data/www/imooc
             - /data/media/imooc/static:/data/media/imooc/static
+            - /data/www/imooc/deployment/gunicorn/conf.d/gunicorn.conf:/etc/gunicorn.conf
             - /data/www/imooc/logs/django/:/var/logs/django/
             - /data/www/imooc/logs/gunicorn/:/var/logs/gunicorn/
         command: /usr/local/bin/gunicorn -c /etc/gunicorn.conf wsgi:application
