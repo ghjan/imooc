@@ -21,7 +21,7 @@ services:
             - /data/www/imooc/deployment/gunicorn/conf.d/gunicorn.conf:/etc/gunicorn.conf
             - /data/www/imooc/logs/django/:/var/log/django/
             - /data/www/imooc/logs/gunicorn/:/var/log/gunicorn/
-        command: /usr/local/bin/gunicorn -c /etc/gunicorn.conf imooc/wsgi:application
+        command: /usr/local/bin/gunicorn -c /etc/gunicorn.conf wsgi:application
         expose:
             - "80"
         links:
