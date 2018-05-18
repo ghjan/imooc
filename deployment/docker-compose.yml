@@ -14,7 +14,7 @@ services:
             - "6379"
         container_name: server_redis
     imooc_service:
-        image: cajan2/imooc_service:latest
+        image: cajan2/imooc:1.0
         volumes:
             - /data/www/imooc:/data/www/imooc
             - /data/media/imooc/static:/data/media/imooc/static
@@ -34,10 +34,6 @@ services:
             - CACHE_CS_HOST=imooc_redis
             - C_FORCE_ROOT=1
             - BROKER_HOST=imooc_redis
-        extra_hosts:
-            - "3d.imooc.com:114.55.119.86"
-            - "imooc.imooc.com:$DB_HOST"
-            - "hightower.tanjiavr.com:$TOWER_HOST"
         container_name: server_gunicorn
 
     imooc_nginx:
@@ -58,7 +54,7 @@ services:
         container_name: server_nginx
 
     imooc_celery:
-        image: cajan2/imooc_service:latest
+        image: cajan2/imooc:1.0
         working_dir: /data/www/imooc/
         command: celery -A project worker -B --logfile=/var/logs/celery/celery.logs
         volumes:
@@ -75,6 +71,4 @@ services:
             - CACHE_CS_HOST=imooc_redis
             - C_FORCE_ROOT=1
             - BROKER_HOST=imooc_redis
-        extra_hosts:
-            - "3d.imooc.com:114.55.119.86"
         container_name: server_celery
