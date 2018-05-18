@@ -5,7 +5,7 @@ services:
         environment:
             - TZ=Asia/Shanghai
         volumes:
-            - /data/www/imooc/logs/redis/:/var/logs/redis/
+            - /data/www/imooc/logs/redis/:/var/log/redis/
             - /data/www/imooc/work_run/redis/:/var/run/redis/
             - /data/www/imooc/deployment/redis/conf.d/redis.conf:/etc/redis/redis.conf
             - /data/www/imooc/work_run/redis_db:/var/lib/redis
@@ -20,7 +20,6 @@ services:
             - /data/media/imooc/static:/data/media/imooc/static
             - /data/www/imooc/logs/django/:/var/logs/django/
             - /data/www/imooc/logs/gunicorn/:/var/logs/gunicorn/
-            - /data/www/imooc/work_run/celery/:/var/run/celery/
         command: /usr/local/bin/gunicorn -c /etc/gunicorn.conf wsgi:application
         expose:
             - "80"
