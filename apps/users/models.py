@@ -13,7 +13,7 @@ class UserProfile(AbstractUser):
     image = models.ImageField(upload_to="image/%Y/%m", default=u"image/default.png", max_length=100)
 
     class Meta:
-        verbose_name = "用户消息"
+        verbose_name = "用户基本信息"
         verbose_name_plural = verbose_name
         app_label = "users"
 
