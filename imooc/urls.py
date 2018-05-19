@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 # from django.urls import path
 from django.conf.urls import url
+from apps.message.views import getform, book_list
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     # path('admin/', admin.site.urls),
+    url(r'^form/$', getform),
+    url(r'^book_list/$', book_list),
 ]
