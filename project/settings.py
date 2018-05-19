@@ -14,12 +14,13 @@ import os
 import sys
 
 DB_HOST = os.environ.get('DB_HOST', 'localhost')
-DB_PASSWORD = os.environ.get('DB_PASSWORD', '')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', '123456')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'project'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -30,7 +31,7 @@ SECRET_KEY = '-3b$%7hb72t34xbe@m3h%y_0jt#*ob*(f(7kw*#6bh(s*av661'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.davidzhang.xin', '106.14.202.116', '0.0.0.0']
+ALLOWED_HOSTS = ['www.davidzhang.xin', '106.14.202.116', 'localhost', '0.0.0.0']
 
 # Application definition
 
