@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import sys
+import crispy_forms
 
 DB_HOST = os.environ.get('DB_HOST', 'localhost')
 DB_PASSWORD = os.environ.get('DB_PASSWORD', '123456')
@@ -46,7 +47,9 @@ INSTALLED_APPS = [
     "courses",
     "organization",
     "operation",
-
+    'xadmin',
+    'crispy_forms',
+    'reversion',
 ]
 AUTH_USER_MODEL = "users.UserProfile"
 
