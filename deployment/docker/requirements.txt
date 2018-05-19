@@ -28,3 +28,4 @@ nose-htmloutput
 coverage
 
 pillow
+six
