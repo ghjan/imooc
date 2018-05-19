@@ -5,22 +5,27 @@ pymysql.install_as_MySQLdb()
 from django.core.serializers.json import json
 
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.conf import settings
+from .models import UserMessage
 
 
 def getform(request):
-    return render(request, "message_form.html")
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        address = request.POST.get('address', '')
+        message = request.POST.get('message', '')
+        user_message = UserMessage()
+        user_message.name = name
+        user_message.email = email
+        user_message.address = address
+        user_message.message = message
+        user_message.save()
+    else:
+        all_messages = UserMessage.objects.filter(name='admin')
+        message = UserMessage()
+        if all_messages:
+            message = all_messages[0]
 
-
-def book_list(request):
-    db = pymysql.connect(user='root', db='db_book', passwd=settings.DB_PASSWORD, host=settings.DB_HOST)
-    cursor = db.cursor()
-    cursor.execute("SELECT bookName FROM t_book ORDER BY bookName")
-    names = [row[0] for row in cursor.fetchall()]
-    db.close()
-
-    content = json.dumps({'status': 'ok', 'data': names}, ensure_ascii=False)
-    response = HttpResponse(content, content_type='application/json; charset=utf-8')
-    return response
-    # return JsonResponse({'status': 'ok', 'data': names})
+        return render(request, "message_comment.html", {"my_message": message})

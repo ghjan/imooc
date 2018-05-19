@@ -11,3 +11,4 @@ class UserMessage(models.Model):
     class Meta:
         verbose_name = u'用户留言信息'
         verbose_name_plural = verbose_name
+        app_label = 'message'
