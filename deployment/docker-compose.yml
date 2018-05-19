@@ -14,7 +14,7 @@ services:
             - "6379"
         container_name: server_redis
     imooc_service:
-        image: cajan2/imooc:1.0
+        image: www/imooc:1.0
         volumes:
             - /data/www/imooc:/data/www/imooc
             - /data/media/imooc/static:/data/media/imooc/static
