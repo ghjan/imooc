@@ -1,14 +1,6 @@
-# from django.contrib import admin
-# import xadmin
-#
+# _*_ coding: utf-8 _*_
+__author__ = 'david'
+__date__ = '2018/5/19 23:34'
+
+import xadmin
 # from .models import UserProfile
-#
-#
-# # Register your models here.
-#
-# class UserProfileAdmin(xadmin.ModelAdmin):
-#     pass
-#     # list_display = ['name', 'email', 'address', 'nick_name']
-#
-#
-# xadmin.site.register(UserProfile, UserProfileAdmin)

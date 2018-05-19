@@ -15,7 +15,7 @@ class UserProfile(AbstractUser):
     class Meta:
         verbose_name = "用户基本信息"
         verbose_name_plural = verbose_name
-        app_label = "users"
+        # app_label = "users"
 
     def __unicode__(self):
         return self.username
