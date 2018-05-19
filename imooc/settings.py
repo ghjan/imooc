@@ -42,8 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "message",
+    "users",
+    "courses",
+    "organization",
+    "operation",
+
 ]
+AUTH_USER_MODEL = "users.UserProfile"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,6 +130,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),)
 print("STATIC_ROOT:{}".format(STATIC_ROOT))
 print("STATICFILES_DIRS:{}".format(STATICFILES_DIRS))
