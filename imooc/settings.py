@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -133,4 +134,9 @@ USE_TZ = False  # 是否utc时间（数据库模型）
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),
+                    os.path.join(BASE_DIR, 'media'),)
+
+# media
+MEDIA_URL = '/media/'  # 这个是在浏览器上访问该上传文件的url的前缀
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
