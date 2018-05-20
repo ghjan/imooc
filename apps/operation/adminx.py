@@ -20,36 +20,36 @@ class CourseCommentsAdmin(object):
     # 后台列表显示列
     list_display = ['user', 'course', 'comments', 'add_time']
     # 后台列表查询条件
-    search_fields = ['user__name', 'course', 'comments']
+    search_fields = ['user__username', 'course', 'comments']
     # 后台列表通过时间查询
-    list_filter = ['user__name', 'course', 'comments', 'add_time']
+    list_filter = ['user__username', 'course', 'comments', 'add_time']
 
 
 class UserFavoriteAdmin(object):
     # 后台列表显示列
     list_display = ['user', 'fav_id', 'fav_type', 'add_time']
     # 后台列表查询条件
-    search_fields = ['user__name', 'fav_id', 'fav_type', ]
+    search_fields = ['user__username', 'fav_id', 'fav_type', ]
     # 后台列表通过时间查询
-    list_filter = ['user__name', 'fav_id', 'fav_type', 'add_time']
+    list_filter = ['user__username', 'fav_id', 'fav_type', 'add_time']
 
 
 class UserMessageAdmin(object):
     # 后台列表显示列
     list_display = ['user', 'message', 'has_read', 'add_time']
     # 后台列表查询条件
-    search_fields = ['user__name', 'message', 'has_read', ]
+    search_fields = ['user', 'message', 'has_read']
     # 后台列表通过时间查询
-    list_filter = ['user__name', 'message', 'has_read', 'add_time']
+    list_filter = ['user', 'message', 'has_read', 'add_time']
 
 
 class UserCourseAdmin(object):
     # 后台列表显示列
     list_display = ['user', 'course', 'add_time']
     # 后台列表查询条件
-    search_fields = ['user__name', 'course_name', ]
+    search_fields = ['user__username', 'course__name', ]
     # 后台列表通过时间查询
-    list_filter = ['user__name', 'course_name', 'add_time']
+    list_filter = ['user__username', 'course__name', 'add_time']
 
 
 xadmin.site.register(UserAsk, UserAskAdmin)

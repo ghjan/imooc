@@ -3,7 +3,17 @@
 # __date__ = '2018/5/19 23:34'
 #
 import xadmin
+import xadmin.views as xviews
+
 from .models import EmailVerifyRecord, Banner
+
+
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+
+
+xadmin.site.register(xviews.BaseAdminView, BaseSetting)
 
 
 class EmailVerifyRecordAdmin(object):
