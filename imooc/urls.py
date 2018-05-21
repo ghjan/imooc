@@ -10,11 +10,14 @@ xadmin.autodiscover()
 from xadmin.plugins import xversion
 
 xversion.register_models()
+from django.views.generic import TemplateView
+from users.views import mylogin, register, mylogout
 
 urlpatterns = [
                   url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
-                  # url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                  #     {'document_root': settings.STATICFILES_DIRS, 'show_indexes': True}),
-                  # url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                  #     {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+                  url('^$', TemplateView.as_view(template_name="index.html"), name="index"),
+                  url('^login/$', mylogin, name="login"),
+                  url('^logout/$', mylogout, name="logout"),
+                  url('^register/$', register, name="register"),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

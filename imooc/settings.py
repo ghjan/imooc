@@ -34,6 +34,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['www.davidzhang.xin', '106.14.202.116', 'localhost', '0.0.0.0']
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailAuthBackend',
+)
+
 # Application definition
 
 INSTALLED_APPS = [
