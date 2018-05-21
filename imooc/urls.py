@@ -11,12 +11,12 @@ from xadmin.plugins import xversion
 
 xversion.register_models()
 from django.views.generic import TemplateView
-from users.views import mylogin, register, mylogout
+from users.views import LoginView, register, mylogout
 
 urlpatterns = [
                   url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
                   url('^$', TemplateView.as_view(template_name="index.html"), name="index"),
-                  url('^login/$', mylogin, name="login"),
+                  url('^login/$', LoginView.as_view(), name="login"),
                   url('^logout/$', mylogout, name="logout"),
                   url('^register/$', register, name="register"),
 
