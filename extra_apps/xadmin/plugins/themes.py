@@ -1,5 +1,6 @@
 # coding:utf-8
 from __future__ import print_function
+import os
 import httplib2
 import requests
 from django.template import loader
@@ -71,25 +72,27 @@ class ThemePlugin(BaseAdminPlugin):
                 themes.extend(json.loads(ex_themes))
             else:
                 ex_themes = []
-                try:
-                    flag = False  # 假如为True使用原来的代码，假如为Flase，使用requests库来访问
-                    url_bootswath = "https://bootswatch.com/api/3.json"
-                    header1 = {"Accept": "application/json",
-                               "User-Agent": self.request.META['HTTP_USER_AGENT']}
-                    headers2 = {
-                        'content-type': 'application/json',
-                        "accept": "text / html, application / xhtml + xml, application / xml;q = 0.9, image / webp, image / apng, * / *;q = 0.8",
-                        "accept-encoding": "gzip, deflate, br",
-                        "User-Agent":
-                            "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36",
-                        "upgrade-insecure-requests": "1",
+                flag = False  # 假如为True使用原来的代码，假如为Flase，使用requests库来访问
+                url_bootswath = "https://bootswatch.com/api/3.json"
+                header1 = {"Accept": "application/json",
+                           "User-Agent": self.request.META['HTTP_USER_AGENT']}
+                headers2 = {
+                    'content-type': 'application/json',
+                    "accept": "text / html, application / xhtml + xml, application / xml;q = 0.9, image / webp, image / apng, * / *;q = 0.8",
+                    "accept-encoding": "gzip, deflate, br",
+                    "User-Agent":
+                        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36",
+                    "upgrade-insecure-requests": "1",
 
-                    }
-                    ck = "__cfduid=d13ae6de34090a59037f21e453bbc267a1526834776; cf_clearance=10fff22cb373a1c8b10204b489658f34b0c9ad8d-1526834783-3600; __utma=97413516.806424570.1526835277.1526835277.1526835277.1; __utmc=97413516; __utmz=97413516.1526835277.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmb=97413516.2.10.1526835277"
-                    cookies = {}
-                    for line in ck.split(';'):
-                        name, value = line.strip().split('=', 1)
-                        cookies[name] = value  # 为字典cookies添加内容
+                }
+                ck = "__cfduid=d13ae6de34090a59037f21e453bbc267a1526834776; cf_clearance=10fff22cb373a1c8b10204b489658f34b0c9ad8d-1526834783-3600; __utma=97413516.806424570.1526835277.1526835277.1526835277.1; __utmc=97413516; __utmz=97413516.1526835277.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmb=97413516.2.10.1526835277"
+                cookies = {}
+                for line in ck.split(';'):
+                    name, value = line.strip().split('=', 1)
+                    cookies[name] = value  # 为字典cookies添加内容
+
+                watch_themes = []
+                try:
                     if flag:
                         h = httplib2.Http()
                         resp, content = h.request(url_bootswath, 'GET', '',
@@ -106,12 +109,14 @@ class ThemePlugin(BaseAdminPlugin):
                                 content = content.text.decode()
                         watch_themes = json.loads(content.text)['themes']
 
-                        ex_themes.extend([
-                                             {'name': t['name'], 'description': t['description'],
-                                              'css': t['cssMin'], 'thumbnail': t['thumbnail']}
-                                             for t in watch_themes])
                 except Exception as e:
-                    print(e)
+                    jsonFile = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'themes3.json')
+                    with open(jsonFile, 'r') as f:
+                        watch_themes = json.loads(f.read())['themes']
+                ex_themes.extend([
+                    {'name': t['name'], 'description': t['description'],
+                     'css': t['cssMin'], 'thumbnail': t['thumbnail']}
+                    for t in watch_themes])
 
                 cache.set(THEME_CACHE_KEY, json.dumps(ex_themes), 24 * 3600)
                 themes.extend(ex_themes)

@@ -1,4 +1,4 @@
-# # _*_ coding: utf-8 _*_
+# _*_ coding: utf-8 _*_
 # __author__ = 'david'
 # __date__ = '2018/5/19 23:34'
 #
@@ -14,6 +14,15 @@ class BaseSetting(object):
 
 
 xadmin.site.register(xviews.BaseAdminView, BaseSetting)
+
+
+class GlobalSettings(object):
+    site_title = "慕学后台管理系统"
+    site_footer = "慕学在线网"
+    menu_style = "accordion"  #默认每个app收起来
+
+
+xadmin.site.register(xviews.CommAdminView, GlobalSettings)
 
 
 class EmailVerifyRecordAdmin(object):
