@@ -29,3 +29,5 @@ coverage
 
 pillow
 six
+
+django-simple-captcha
