@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "organization",
     "operation",
     'xadmin',
+    'captcha',
     'crispy_forms',
     'reversion',
 ]
@@ -145,3 +146,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),
 # media
 MEDIA_URL = '/media/'  # 这个是在浏览器上访问该上传文件的url的前缀
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
+
+EMAIL_HOST = "smtp.sina.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'cajan2@sina.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = False
+DEFAULT_CHARSET = 'utf-8'
+EMAIL_FROM =EMAIL_HOST_USER

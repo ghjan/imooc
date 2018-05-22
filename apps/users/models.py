@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.conf import settings
 
 
 class UserProfile(AbstractUser):
@@ -13,7 +12,7 @@ class UserProfile(AbstractUser):
     address = models.CharField(max_length=100, default="")
     mobile = models.CharField(max_length=11, default="", null=True, blank=True)
     image = models.ImageField(upload_to="image/%Y/%m",
-                              default=u"/static/images/default.png", max_length=100)
+                              default=u"image/default.png", max_length=100)
 
     class Meta:
         verbose_name = "用户基本信息"
