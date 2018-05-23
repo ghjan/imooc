@@ -48,14 +48,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "users",
-    "courses",
-    "organization",
-    "operation",
+
     'xadmin',
     'captcha',
     'crispy_forms',
     'reversion',
+    'pure_pagination',
+
+    "users",
+    "courses",
+    "organization",
+    "operation",
 ]
 AUTH_USER_MODEL = "users.UserProfile"
 
@@ -153,4 +156,11 @@ EMAIL_HOST_USER = 'cajan2@sina.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = False
 DEFAULT_CHARSET = 'utf-8'
-EMAIL_FROM =EMAIL_HOST_USER
+EMAIL_FROM = EMAIL_HOST_USER
+
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}

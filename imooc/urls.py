@@ -15,20 +15,27 @@ from users.views import LoginView, RegisterView, LogoutView, UsercenterView, Act
     ResetView, SetpwdView
 from courses.views import CoursesListView
 from organization.views import TeachersList, OrgList
+from django.views.static import serve
 
 urlpatterns = [
-                  url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
-                  url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
-                  url(r'^login/$', LoginView.as_view(), name="login"),
-                  url(r'^logout/$', LogoutView.as_view(), name="logout"),
-                  url(r'^register/$', RegisterView.as_view(), name="register"),
-                  url(r'^forgetpwd/$', ForgetpwdView.as_view(), name="forgetpwd"),
-                  url(r'^activate/(?P<code>\w+)/$', ActivateUserView.as_view()),
-                  url(r'^reset/(?P<code>\w+)/$', ResetView.as_view(), name="resetpwd"),
-                  url(r'^setpwd/$', SetpwdView.as_view(), name="setpwd"),
-                  url(r'^usercenter-info/$', UsercenterView.as_view(), name="usercenter-info"),
-                  url(r'^captcha/', include('captcha.urls')),
-                  url(r'^courses/list$', CoursesListView.as_view(), name="courses_list"),
-                  url(r'^teachers/list$', TeachersList.as_view(), name="teachers_list"),
-                  url(r'^org/list$', OrgList.as_view(), name="org_list"),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^logout/$', LogoutView.as_view(), name="logout"),
+    url(r'^register/$', RegisterView.as_view(), name="register"),
+    url(r'^forgetpwd/$', ForgetpwdView.as_view(), name="forgetpwd"),
+    url(r'^activate/(?P<code>\w+)/$', ActivateUserView.as_view()),
+    url(r'^reset/(?P<code>\w+)/$', ResetView.as_view(), name="resetpwd"),
+    url(r'^setpwd/$', SetpwdView.as_view(), name="setpwd"),
+    url(r'^usercenter-info/$', UsercenterView.as_view(), name="usercenter-info"),
+    url(r'^captcha/', include('captcha.urls')),
+    url(r'^courses/list$', CoursesListView.as_view(), name="courses_list"),
+    url(r'^teachers/list$', TeachersList.as_view(), name="teachers_list"),
+    url(r'^org/list$', OrgList.as_view(), name="org_list"),
+]
+
+if settings.DEBUG:
+    # urlpatterns.extend([url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
+    #                     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    #                     ])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

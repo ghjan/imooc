@@ -31,3 +31,4 @@ pillow
 six
 
 django-simple-captcha
+django-pure-pagination

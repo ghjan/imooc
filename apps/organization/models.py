@@ -4,6 +4,7 @@ from django.db import models
 
 from courses.models import Course
 
+
 class CityDict(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"名称")
     desc = models.CharField(max_length=200, verbose_name=u"描述")
@@ -23,7 +24,7 @@ class CityDict(models.Model):
 class CourseOrg(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"机构名称")
     desc = models.TextField(verbose_name=u"机构描述")
-    category = models.CharField(choices=(("pxjg", "培训机构"),("gr", "个人"),("gx", "高校")), max_length=4, default="gx")
+    category = models.CharField(choices=(("pxjg", "培训机构"), ("gr", "个人"), ("gx", "高校")), max_length=4, default="gx")
     click_num = models.IntegerField(default=0, verbose_name=u"点击数")
     fav_num = models.IntegerField(default=0, verbose_name=u"收藏人数")
     image = models.ImageField(upload_to="org/%Y/%m", verbose_name=u"封面图", max_length=100)
@@ -31,7 +32,8 @@ class CourseOrg(models.Model):
     city = models.ForeignKey(CityDict, verbose_name=u"城市")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
     course_num = models.IntegerField(default=0, verbose_name=u"课程数")
-    classic_course = models.ForeignKey(Course, verbose_name=u"经典课程")
+    classic_course = models.ForeignKey(Course, null=True, verbose_name=u"经典课程")
+
     class Meta:
         verbose_name = u"授课机构"
         verbose_name_plural = verbose_name
