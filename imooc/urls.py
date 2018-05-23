@@ -13,6 +13,8 @@ xversion.register_models()
 from django.views.generic import TemplateView
 from users.views import LoginView, RegisterView, LogoutView, UsercenterView, ActivateUserView, ForgetpwdView, \
     ResetView, SetpwdView
+from courses.views import CoursesListView
+from organization.views import TeachersList, OrgList
 
 urlpatterns = [
                   url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
@@ -26,5 +28,7 @@ urlpatterns = [
                   url(r'^setpwd/$', SetpwdView.as_view(), name="setpwd"),
                   url(r'^usercenter-info/$', UsercenterView.as_view(), name="usercenter-info"),
                   url(r'^captcha/', include('captcha.urls')),
-
+                  url(r'^courses/list$', CoursesListView.as_view(), name="courses_list"),
+                  url(r'^teachers/list$', TeachersList.as_view(), name="teachers_list"),
+                  url(r'^org/list$', OrgList.as_view(), name="org_list"),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -78,14 +78,14 @@
                         <ul>
                             <li class="active"><a href="{% url 'index' %}">首页</a></li>
                             <li>
-                                <a href="course-list.html">
+                                <a href="{% url 'courses_list' %}">
                                     公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
                                 </a>
                             </li>
                             <li>
-                                <a href="teachers-list.html">授课教师</a>
+                                <a href="{% url 'teachers_list' %}">授课教师</a>
                             </li>
-                            <li><a href="org-list.html">授课机构</a></li>
+                            <li><a href="{% url 'org_list' %}">授课机构</a></li>
                         </ul>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                 <div class="module1_1 left">
                     <img width="228" height="614" src="{% static 'images/module1_1.jpg' %}"/>
                     <p class="fisrt_word">名师授课<br/>专业权威</p>
-                    <a class="more" href="course-list.html">查看更多课程 ></a>
+                    <a class="more" href="{% url 'courses_list' %}">查看更多课程 ></a>
                 </div>
                 <div class="right group_list">
                     <div class="module1_2 box">
@@ -326,7 +326,7 @@
                 <div class="module3_1 left">
                     <img width="228" height="463" src="{% static 'images/module3_1.jpg' %}"/>
                     <p class="fisrt_word">名校来袭<br/>权威认证</p>
-                    <a class="more" href="org-list.html">查看更多机构 ></a>
+                    <a class="more" href="{% url 'org_list' %}">查看更多机构 ></a>
                 </div>
                 <div class="right">
                     <ul>
