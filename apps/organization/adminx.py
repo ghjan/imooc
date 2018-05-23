@@ -18,9 +18,9 @@ class CourseOrgAdmin(object):
     # 后台列表显示列
     list_display = ['name', 'desc', 'address', 'city', 'fav_num', 'click_num', 'add_time']
     # 后台列表查询条件
-    search_fields = ['name', 'desc', 'address', 'city', 'fav_num', 'click_num']
+    search_fields = ['name', 'desc', 'address', 'city__name', 'fav_num', 'click_num']
     # 后台列表通过时间查询
-    list_filter = ['name', 'desc', 'address', 'city', 'fav_num', 'click_num', 'add_time']
+    list_filter = ['name', 'desc', 'address', 'city__name', 'fav_num', 'click_num', 'add_time']
 
 
 class TeacherAdmin(object):
