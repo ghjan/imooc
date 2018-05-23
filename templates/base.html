@@ -21,85 +21,86 @@
 </head>
 <body>
 <section class="headerwrap ">
-    {% block sheader %}
     <header>
         <div class=" header">
-            <div class="top">
-                <div class="wp">
-                    <div class="fl"><p>服务电话：<b>33333333</b></p></div>
-                    <!--登录后跳转-->
+            {% block top %}
+                <div class="top">
+                    <div class="wp">
+                        <div class="fl"><p>服务电话：<b>33333333</b></p></div>
+                        <!--登录后跳转-->
 
-                    {% if request.user.is_authenticated %}
-                        <div class="personal">
-                            <dl class="user fr">
-                                <dd>{{ username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
-                                <dt><img width="20" height="20" src="{{ image }}"/></dt>
-                            </dl>
-                            <div class="userdetail">
-                                <dl>
-                                    <dt><img width="80" height="80" src="{{ image }}"/></dt>
-                                    <dd>
-                                        <h2>django</h2>
-                                        <p>{{ username }}</p>
+                        {% if request.user.is_authenticated %}
+                            <div class="personal">
+                                <dl class="user fr">
+                                    <dd>{{ username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/>
                                     </dd>
+                                    <dt><img width="20" height="20" src="{{ image }}"/></dt>
                                 </dl>
-                                <div class="btn">
-                                    <a class="personcenter fl" href="{% url 'usercenter-info' %}">进入个人中心</a>
-                                    <a class="fr" href="{% url 'logout' %}">退出</a>
+                                <div class="userdetail">
+                                    <dl>
+                                        <dt><img width="80" height="80" src="{{ image }}"/></dt>
+                                        <dd>
+                                            <h2>django</h2>
+                                            <p>{{ username }}</p>
+                                        </dd>
+                                    </dl>
+                                    <div class="btn">
+                                        <a class="personcenter fl" href="{% url 'usercenter-info' %}">进入个人中心</a>
+                                        <a class="fr" href="{% url 'logout' %}">退出</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
-                        <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
-                    {% endif %}
+                        {% else %}
+                            <a style="color:white" class="fr registerbtn" href="{% url 'register' %}">注册</a>
+                            <a style="color:white" class="fr loginbtn" href="{% url 'login' %}">登录</a>
+                        {% endif %}
 
+                    </div>
                 </div>
-            </div>
-
-            <div class="middle">
-                <div class="wp">
-                    <a href="{% url 'index' %}"><img class="fl" src="{% static 'images/logo.png' %}"/></a>
-                    <div class="searchbox fr">
-                        <div class="selectContainer fl">
+            {% endblock %}
+            {% block middle %}
+                <div class="middle">
+                    <div class="wp">
+                        <a href="{% url 'index' %}"><img class="fl" src="{% static 'images/logo.png' %}"/></a>
+                        <div class="searchbox fr">
+                            <div class="selectContainer fl">
                             <span class="selectOption" id="jsSelectOption" data-value="course">
                                 公开课
                             </span>
-                            <ul class="selectMenu" id="jsSelectMenu">
-                                <li data-value="course">公开课</li>
-                                <li data-value="org">课程机构</li>
-                                <li data-value="teacher">授课老师</li>
+                                <ul class="selectMenu" id="jsSelectMenu">
+                                    <li data-value="course">公开课</li>
+                                    <li data-value="org">课程机构</li>
+                                    <li data-value="teacher">授课老师</li>
+                                </ul>
+                            </div>
+                            <input id="search_keywords" class="fl" type="text" value="" placeholder="请输入搜索内容"/>
+                            <img class="search_btn fr" id="jsSearchBtn" src="{% static 'images/search_btn.png' %}"/>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% block nav %}
+                <nav>
+                    <div class="nav">
+                        <div class="wp">
+                            <ul>
+                                <li class="active"><a href="{% url 'index' %}">首页</a></li>
+                                <li>
+                                    <a href="{% url 'courses_list' %}">
+                                        公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teachers_list' %}">授课教师</a>
+                                </li>
+                                <li><a href="{% url 'org_list' %}">授课机构</a></li>
                             </ul>
                         </div>
-                        <input id="search_keywords" class="fl" type="text" value="" placeholder="请输入搜索内容"/>
-                        <img class="search_btn fr" id="jsSearchBtn" src="{% static 'images/search_btn.png' %}"/>
                     </div>
-                </div>
-            </div>
-
-
-            <nav>
-                <div class="nav">
-                    <div class="wp">
-                        <ul>
-                            <li class="active"><a href="{% url 'index' %}">首页</a></li>
-                            <li>
-                                <a href="{% url 'courses_list' %}">
-                                    公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'teachers_list' %}">授课教师</a>
-                            </li>
-                            <li><a href="{% url 'org_list' %}">授课机构</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+                </nav>
+            {% endblock %}
         </div>
     </header>
-    {% endblock %}
 </section>
 <section>
     {% block crumbs %}
@@ -142,14 +143,14 @@
     {% endblock %}
 </footer>
 <section>
-{% block sidebar %}
-    <ul class="sidebar">
-        <li class="qq">
-            <a target="_blank" href="http:/wpa.qq.com/msgrd?v=3&uin=2023525077&site=qq&menu=yes"></a>
-        </li>
-        <li class="totop"></li>
-    </ul>
-{% endblock %}
+    {% block sidebar %}
+        <ul class="sidebar">
+            <li class="qq">
+                <a target="_blank" href="http:/wpa.qq.com/msgrd?v=3&uin=2023525077&site=qq&menu=yes"></a>
+            </li>
+            <li class="totop"></li>
+        </ul>
+    {% endblock %}
 </section>
 
 {% block customejs2 %}
