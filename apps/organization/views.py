@@ -20,7 +20,7 @@ class OrgList(View):
         except PageNotAnInteger:
             page = 1
         # Provide Paginator with the request object for complete querystring generation
-        p = Paginator(all_orgs, 5, request=request)
+        p = Paginator(all_orgs, 2, request=request)
         orgs = p.page(page)
         org_nums = len(all_orgs)
         return render(request, 'org_list.html', {
