@@ -5,9 +5,9 @@ from django.views.generic.base import View
 
 class TeachersList(View):
     def get(self, request):
-        return render(request, 'teachers-list.html', {})
+        return render(request, 'teachers_list.html', {})
 
 
 class OrgList(View):
     def get(self, request):
-        return render(request, 'org-list.html', {})
+        return render(request, 'org_list.html', {})

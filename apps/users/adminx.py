@@ -17,8 +17,8 @@ xadmin.site.register(xviews.BaseAdminView, BaseSetting)
 
 
 class GlobalSettings(object):
-    site_title = "慕学后台管理系统"
-    site_footer = "慕学在线网"
+    site_title = "慕雪后台管理系统"
+    site_footer = "慕雪在线网"
     menu_style = "accordion"  #默认每个app收起来
 
 
