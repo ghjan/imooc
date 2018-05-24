@@ -33,6 +33,7 @@ class CourseOrg(models.Model):
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
     course_num = models.IntegerField(default=0, verbose_name=u"课程数")
     classic_course = models.ForeignKey(Course, null=True, verbose_name=u"经典课程")
+    students = models.IntegerField(default=0, verbose_name=u"学习人数")
 
     class Meta:
         verbose_name = u"授课机构"
