@@ -37,9 +37,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'teachers_list' %}">授课教师</a>
+                        <a href="{% url 'organization:teachers_list' %}">授课教师</a>
                     </li>
-                    <li class="active"><a href="{% url 'org_list' %}">授课机构</a></li>
+                    <li class="active"><a href="{% url 'organization:org_list' %}">授课机构</a></li>
                 </ul>
             </div>
         </div>
@@ -92,9 +92,12 @@
                 <div class="layout">
                     <div class="head">
                         <ul class="tab_header">
-                            <li class="{% ifequal sort "" %}active{% endifequal %}"><a href="?ct={{ ct }}&city={{ city_id }}">全部</a></li>
-                            <li class="{% ifequal sort "students" %}active{% endifequal %}"><a href="?sort=students&ct={{ ct }}&city={{ city_id }}">学习人数 &#8595;</a></li>
-                            <li class="{% ifequal sort "courses" %}active{% endifequal %}"><a href="?sort=courses&ct={{ ct }}&city={{ city_id }}">课程数 &#8595;</a></li>
+                            <li class="{% ifequal sort "" %}active{% endifequal %}"><a
+                                    href="?ct={{ ct }}&city={{ city_id }}">全部</a></li>
+                            <li class="{% ifequal sort "students" %}active{% endifequal %}"><a
+                                    href="?sort=students&ct={{ ct }}&city={{ city_id }}">学习人数 &#8595;</a></li>
+                            <li class="{% ifequal sort "courses" %}active{% endifequal %}"><a
+                                    href="?sort=courses&ct={{ ct }}&city={{ city_id }}">课程数 &#8595;</a></li>
                         </ul>
                     </div>
                     {% for course_org in all_orgs.object_list %}
@@ -188,7 +191,7 @@
                     <dt class="num fl">{{ forloop.counter }}</dt>
                     <dd>
                         <a href="/company/2/"><h1>{{ org.name }}</h1></a>
-                        <p>{{ org.city.name}}-{{ org.address }}</p>
+                        <p>{{ org.city.name }}-{{ org.address }}</p>
                     </dd>
                 </dl>
             {% endfor %}
@@ -205,15 +208,16 @@
                 $.ajax({
                     cache: false,
                     type: "POST",
-                    url: "/org/add_ask/",
+                    url: "{% url 'operation:add_ask' %}",
                     data: $('#jsStayForm').serialize(),
                     async: true,
                     success: function (data) {
                         if (data.status == 'success') {
                             $('#jsStayForm')[0].reset();
-                            alert("提交成功")
+                            $('#jsCompanyTips').html("");
+                            alert("提交成功");
                         } else if (data.status == 'fail') {
-                            $('#jsCompanyTips').html(data.msg)
+                            $('#jsCompanyTips').html(JSON.stringify(data.msg))
                         }
                     },
                 });

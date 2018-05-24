@@ -45,7 +45,7 @@
                                         </dd>
                                     </dl>
                                     <div class="btn">
-                                        <a class="personcenter fl" href="{% url 'usercenter-info' %}">进入个人中心</a>
+                                        <a class="personcenter fl" href="{% url 'usercenterinfo' %}">进入个人中心</a>
                                         <a class="fr" href="{% url 'logout' %}">退出</a>
                                     </div>
                                 </div>
@@ -91,9 +91,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'teachers_list' %}">授课教师</a>
+                                    <a href="{% url 'organization:teachers_list' %}">授课教师</a>
                                 </li>
-                                <li><a href="{% url 'org_list' %}">授课机构</a></li>
+                                <li><a href="{% url 'organization:org_list' %}">授课机构</a></li>
                             </ul>
                         </div>
                     </div>

@@ -28,9 +28,9 @@ class OrgList(View):
         sort = request.GET.get("sort", "")
         if sort:
             if sort == "students":
-                all_orgs.order_by("-students")
+                all_orgs = all_orgs.order_by('-students')
             elif sort == "courses":
-                all_orgs.order_by("-course_num")
+                all_orgs = all_orgs.order_by('-course_num')
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
