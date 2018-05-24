@@ -9,11 +9,13 @@ xadmin.autodiscover()
 
 # version模块自动注册需要版本控制的 Model
 from xadmin.plugins import xversion
+from views import HomepageView
 
 xversion.register_models()
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    # url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^$', HomepageView.as_view(), name="index"),
     url(r'^xadmin/', xadmin.site.urls, name='xadmin'),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^course/', include('courses.urls')),

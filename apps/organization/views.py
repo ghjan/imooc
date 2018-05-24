@@ -49,3 +49,64 @@ class OrgList(View):
             "hot_orgs": hot_orgs,
             "sort": sort,
         })
+
+
+class OrgDetailHomepage(View):
+    def get(self, request, org_id):
+        try:
+            org = CourseOrg.objects.get(id=int(org_id))
+            all_courses = org.course_set.all()
+            all_teachers = org.teacher_set.all()
+            return render(request, 'org_detail_homepage.html', {
+                'all_courses': all_courses,
+                'all_teachers': all_teachers,
+                'org': org,
+            })
+        except Exception as e:
+            print(e)
+            # return render(request, 'org_detail_homepage.html', {})
+
+
+class OrgDetailDesc(View):
+    def get(self, request, org_id):
+        try:
+            org = CourseOrg.objects.get(id=int(org_id))
+            all_courses = org.course_set.all()
+            all_teachers = org.teacher_set.all()
+            return render(request, 'org_detail_desc.html', {
+                'all_courses': all_courses,
+                'all_teachers': all_teachers,
+                'org': org,
+            })
+        except Exception as e:
+            print(e)
+
+
+class OrgDetailCourse(View):
+    def get(self, request, org_id):
+        try:
+            org = CourseOrg.objects.get(id=int(org_id))
+            all_courses = org.course_set.all()
+            all_teachers = org.teacher_set.all()
+            return render(request, 'org_detail_course.html', {
+                'all_courses': all_courses,
+                'all_teachers': all_teachers,
+                'org': org,
+            })
+        except Exception as e:
+            print(e)
+
+
+class OrgDetailTeachers(View):
+    def get(self, request, org_id):
+        try:
+            org = CourseOrg.objects.get(id=int(org_id))
+            all_courses = org.course_set.all()
+            all_teachers = org.teacher_set.all()
+            return render(request, 'org_detail_teachers.html', {
+                'all_courses': all_courses,
+                'all_teachers': all_teachers,
+                'org': org,
+            })
+        except Exception as e:
+            print(e)
