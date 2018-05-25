@@ -10,4 +10,7 @@ from organization.models import CourseOrg
 class HomepageView(View):
     def get(self, request):
         all_orgs = CourseOrg.objects.all()
-        return render(request, 'index.html', {"all_orgs": all_orgs})
+        return render(request, 'index.html', {
+            'list_view': 'home',
+            'all_orgs': all_orgs,
+        })

@@ -1,15 +1,21 @@
+# -*- coding: utf-8 -*-
+
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.base import View
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from operation.models import UserFavorite
 from .models import CityDict, CourseOrg, Teacher
-from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 
 class TeachersList(View):
     def get(self, request):
-        return render(request, 'teachers_list.html', {})
+        all_teachers = Teacher.objects.all()
+        return render(request, 'teachers_list.html', {
+            'list_view': 'teachers',
+            'all_teachers': all_teachers,
+        })
 
 
 class OrgList(View):
@@ -42,6 +48,7 @@ class OrgList(View):
         orgs = p.page(page)
         org_nums = len(all_orgs)
         return render(request, 'org_list.html', {
+            'list_view': 'orgs',
             "all_orgs": orgs,
             "all_cities": all_cities,
             "org_nums": org_nums,
