@@ -8,11 +8,11 @@ from .models import Course, Lesson, Video, CourseResource
 
 class CourseAdmin(object):
     # 后台列表显示列
-    list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num', 'add_time']
+    list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num', 'add_time','course_org']
     # 后台列表查询条件
-    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num']
+    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num', 'course_org__name']
     # 后台列表通过时间查询
-    list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num', 'add_time']
+    list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_num', 'click_num', 'add_time', 'course_org__name']
 
 
 class LessonAdmin(object):

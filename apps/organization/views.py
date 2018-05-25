@@ -1,6 +1,8 @@
+import json
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from django.views.generic.base import View
+from operation.models import UserFavorite
 from .models import CityDict, CourseOrg, Teacher
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
@@ -51,62 +53,116 @@ class OrgList(View):
         })
 
 
-class OrgDetailHomepage(View):
+class OrgHomepageView(View):
     def get(self, request, org_id):
         try:
+            data = {}
             org = CourseOrg.objects.get(id=int(org_id))
+            has_fav = True if request.user.is_authenticated() and UserFavorite.objects.filter(user=request.user,
+                                                                                              fav_id=int(org_id),
+                                                                                              fav_type=int(
+                                                                                                  2)) else False
             all_courses = org.course_set.all()
             all_teachers = org.teacher_set.all()
-            return render(request, 'org_detail_homepage.html', {
+            data.update({
+                'has_fav': has_fav,
+                'view': "homepage",
                 'all_courses': all_courses,
                 'all_teachers': all_teachers,
                 'org': org,
             })
+            return render(request, 'org_detail_homepage.html', data)
         except Exception as e:
             print(e)
             # return render(request, 'org_detail_homepage.html', {})
 
 
-class OrgDetailDesc(View):
+class OrgCourseView(View):
     def get(self, request, org_id):
         try:
             org = CourseOrg.objects.get(id=int(org_id))
+            has_fav = True if request.user.is_authenticated() and UserFavorite.objects.filter(user=request.user,
+                                                                                              fav_id=int(org_id),
+                                                                                              fav_type=int(
+                                                                                                  2)) else False
             all_courses = org.course_set.all()
-            all_teachers = org.teacher_set.all()
-            return render(request, 'org_detail_desc.html', {
-                'all_courses': all_courses,
-                'all_teachers': all_teachers,
-                'org': org,
-            })
-        except Exception as e:
-            print(e)
 
+            courses_nums = len(all_courses)
 
-class OrgDetailCourse(View):
-    def get(self, request, org_id):
-        try:
-            org = CourseOrg.objects.get(id=int(org_id))
-            all_courses = org.course_set.all()
-            all_teachers = org.teacher_set.all()
             return render(request, 'org_detail_course.html', {
+                'has_fav': has_fav,
+                'view': "course",
                 'all_courses': all_courses,
-                'all_teachers': all_teachers,
+                'courses_nums': courses_nums,
                 'org': org,
             })
         except Exception as e:
             print(e)
 
 
-class OrgDetailTeachers(View):
+class OrgDescView(View):
     def get(self, request, org_id):
         try:
             org = CourseOrg.objects.get(id=int(org_id))
-            all_courses = org.course_set.all()
+            has_fav = True if request.user.is_authenticated() and UserFavorite.objects.filter(user=request.user,
+                                                                                              fav_id=int(org_id),
+                                                                                              fav_type=int(
+                                                                                                  2)) else False
+            return render(request, 'org_detail_desc.html', {
+                'has_fav': has_fav,
+                'view': "desc",
+                'org': org,
+            })
+        except Exception as e:
+            print(e)
+
+
+class OrgTeachersView(View):
+    def get(self, request, org_id):
+        try:
+            org = CourseOrg.objects.get(id=int(org_id))
+            has_fav = True if request.user.is_authenticated() and UserFavorite.objects.filter(user=request.user,
+                                                                                              fav_id=int(org_id),
+                                                                                              fav_type=int(
+                                                                                                  2)) else False
             all_teachers = org.teacher_set.all()
             return render(request, 'org_detail_teachers.html', {
-                'all_courses': all_courses,
+                'has_fav': has_fav,
+                'view': "teachers",
                 'all_teachers': all_teachers,
                 'org': org,
             })
         except Exception as e:
             print(e)
+
+
+class AddFavView(View):
+    """
+    用户收藏/取消收藏
+    """
+
+    def post(self, request):
+        fav_id = request.POST.get('fav_id')
+        fav_type = request.POST.get('fav_type')
+
+        # 判断用户登录状态
+        if not request.user.is_authenticated():
+            return HttpResponse(json.dumps({'status': 'fail', 'msg': '用户未登录'}), content_type='application/json')
+
+        exist_records = UserFavorite.objects.filter(user=request.user, fav_id=int(fav_id), fav_type=int(fav_type))
+        if exist_records:
+            # 已经存在，表示取消收藏
+            exist_records.delete()
+            return HttpResponse(json.dumps({'status': 'success', 'msg': '已取消收藏'}),
+                                content_type='application/json')
+        else:
+            if int(fav_id) > 0 and int(fav_type) > 0:
+                user_fav = UserFavorite()
+                user_fav.fav_type = fav_type
+                user_fav.fav_id = fav_id
+                user_fav.user = request.user
+                user_fav.save()
+                return HttpResponse(json.dumps({'status': 'success', 'msg': '已收藏'}),
+                                    content_type='application/json')
+            else:
+                return HttpResponse(json.dumps({'status': 'fail', 'msg': '收藏出错'}), content_type='application/json')
