@@ -24,15 +24,13 @@
                     </ul>
                     <div class="fr butler-num">共<span class="key">{{ teacher_nums }}</span>人&nbsp;&nbsp;&nbsp;</div>
                 </div>
-                <dl class="des">
-                    {% for teacher in all_teacherss %}
+                {% for teacher in all_teachers.object_list %}
+                    <dl class="des">
                         <dt>
-                            <a href="/org/teacher/detail/1/">
-                                <div class="picpic">
-                                    <img width="80" height="80" class="scrollLoading"
-                                         src="{{ MEDIA_URL }}{{ teacher.image }}"/>
-                                </div>
-                            </a>
+                        <div class="picpic">
+                            <img width="80" height="80" class="scrollLoading"
+                                 src="{{ MEDIA_URL }}{{ teacher.image }}"/>
+                        </div>
                         <div class="btn">
                             <div class="fr btn2 bdsharebuttonbox"
                                  data-text="授课教师-{{ teacher.name }}-{{ teacher.org.name }}"
@@ -53,11 +51,12 @@
                                 <li>就职公司：<span>{{ teacher.work_company }}&nbsp;</span></li>
                                 <li>年龄：<span>18岁</span></li>
                                 <li>教学特点：<span>xxx</span></li>
+                                <li>收藏人数：<span>{{ teacher.fav_num }}</span></li>
                             </ul>
                         </dd>
                         <a class="buy buyservice" href="/org/teacher/detail/1/"><br/>查看<br/>详情</a>
-                    {% endfor %}
-                </dl>
+                    </dl>
+                {% endfor %}
 
             </div>
             <div class="pageturn">

@@ -24,7 +24,7 @@ class TeachersList(View):
         except:
             param_page = 1
         # Provide Paginator with the request object for complete querystring generation
-        p = Paginator(all_teachers, 3)
+        p = Paginator(all_teachers, 2, request=request)
         teachers = p.page(param_page)
         teacher_nums = len(all_teachers)
         return render(request, 'teachers_list.html', {
