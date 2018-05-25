@@ -25,12 +25,12 @@ class CourseOrgAdmin(object):
 
 class TeacherAdmin(object):
     # 后台列表显示列
-    list_display = ['org', 'name', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num',
+    list_display = ['name', 'org', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num',
                     'add_time']
     # 后台列表查询条件
-    search_fields = ['org', 'name', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num']
+    search_fields = ['name', 'org', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num']
     # 后台列表通过时间查询
-    list_filter = ['org', 'name', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num',
+    list_filter = ['name', 'org', 'work_years', 'work_company', 'work_position', 'points', 'fav_num', 'click_num',
                    'add_time']
 
 

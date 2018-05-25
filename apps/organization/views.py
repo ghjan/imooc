@@ -12,9 +12,27 @@ from .models import CityDict, CourseOrg, Teacher
 class TeachersList(View):
     def get(self, request):
         all_teachers = Teacher.objects.all()
+        hot_teachers = Teacher.objects.order_by("-click_num")[:3]
+
+        sort = request.GET.get("sort", "")
+        if sort:
+            if sort == "hot":
+                all_teachers = all_teachers.order_by('-fav_num')
+
+        try:
+            param_page = request.GET.get('page', 1)
+        except:
+            param_page = 1
+        # Provide Paginator with the request object for complete querystring generation
+        p = Paginator(all_teachers, 3)
+        teachers = p.page(param_page)
+        teacher_nums = len(all_teachers)
         return render(request, 'teachers_list.html', {
             'list_view': 'teachers',
-            'all_teachers': all_teachers,
+            'all_teachers': teachers,
+            'teacher_nums': teacher_nums,
+            'sort': sort,
+            'hot_teachers': hot_teachers,
         })
 
 
