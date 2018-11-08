@@ -3,4 +3,4 @@
 *.rdb
 *.log
 *.pyc
-
+settings_local.py

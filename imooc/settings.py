@@ -131,3 +131,8 @@ USE_TZ = False  # 是否utc时间（数据库模型）
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),)
+
+try:
+    from .settings_local import *
+except Exception as e:
+    print(e)
