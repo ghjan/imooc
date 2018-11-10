@@ -4,4 +4,5 @@
 *.log
 *.pyc
 settings_local*.py
+static_root
 
