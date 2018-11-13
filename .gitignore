@@ -3,4 +3,6 @@
 *.rdb
 *.log
 *.pyc
+media
+settings_local*.py
 
