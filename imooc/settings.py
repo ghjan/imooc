@@ -140,3 +140,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'common_static'),
 # media
 MEDIA_URL = '/media/'  # 这个是在浏览器上访问该上传文件的url的前缀
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
+
+
+try:
+    from .settings_local import *
+except Exception as e:
+    print(e)
